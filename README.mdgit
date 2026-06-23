@@ -1,0 +1,1 @@
+"# polar-ac-website"  initgit add README.mdgit commit -m "first commit"git branch -M maingit remote add origin https://github.com/ivan-buda-montania/polar-ac-website.gitgit push -u origin main
