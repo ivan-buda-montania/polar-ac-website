@@ -107,7 +107,7 @@ export default function Hero() {
           <PolarBearLogo size={380} variant="surfing" />
 
           {/* Floating badge */}
-          <div style={{
+          <a href="https://wa.me/17606583881?text=Hi!%20I%27d%20like%20a%20free%20AC%20service%20estimate." target="_blank" rel="noreferrer" style={{
             position: "absolute", top: "5%", right: "5%",
             background: C.sun, color: C.navy,
             borderRadius: "50%", width: 80, height: 80,
@@ -117,9 +117,10 @@ export default function Hero() {
             boxShadow: "0 6px 20px rgba(255,213,74,0.6)",
             border: `3px solid ${C.orange}`,
             animation: "pulse 2s ease-in-out infinite",
+            textDecoration: "none", cursor: "pointer",
           }}>
             FREE<br />ESTIMATE
-          </div>
+          </a>
         </div>
       </div>
 

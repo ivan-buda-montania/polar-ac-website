@@ -7,7 +7,12 @@ export default function Contact() {
   const [sent, setSent] = useState(false);
 
   const handle = e => setForm({ ...form, [e.target.name]: e.target.value });
-  const submit = e => { e.preventDefault(); setSent(true); };
+  const submit = e => {
+    e.preventDefault();
+    const msg = `Hi! I'd like a free AC service estimate.\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nService: ${form.service}\nMessage: ${form.message}`;
+    window.open(`https://wa.me/17606583881?text=${encodeURIComponent(msg)}`, '_blank');
+    setSent(true);
+  };
 
   const inp = {
     width: "100%", padding: "12px 16px", borderRadius: 8,
@@ -35,7 +40,7 @@ export default function Contact() {
             Free estimates on all service calls. We'll confirm your appointment within a few hours.
           </p>
           {[
-            { icon: "📞", label: "Phone", val: "760-658-3881 / 760-445-2261" },
+            { icon: "📞", label: "Phone", val: "+1 (760) 658-3881" },
             { icon: "🏆", label: "License", val: "Lic # 1131567" },
             { icon: "📍", label: "Service Area", val: "San Diego & Surrounding Areas" },
             { icon: "🕐", label: "Hours", val: "Mon–Sat 7AM–7PM · Emergency calls available" },

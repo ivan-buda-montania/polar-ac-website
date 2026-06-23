@@ -70,7 +70,7 @@ export default function SummerSpecial() {
                 onMouseOut={e => e.currentTarget.style.transform = "none"}>
                 Book Now →
               </a>
-              <a href="tel:7604452261" style={{
+              <a href="tel:7606583881" style={{
                 border: "2px solid rgba(255,255,255,0.3)", color: C.white,
                 padding: "14px 24px", borderRadius: 10,
                 fontWeight: 700, fontSize: 15, textDecoration: "none",
@@ -78,7 +78,7 @@ export default function SummerSpecial() {
               }}
                 onMouseOver={e => e.currentTarget.style.background = "rgba(255,255,255,0.1)"}
                 onMouseOut={e => e.currentTarget.style.background = "transparent"}>
-                📞 760-445-2261
+                📞 +1 (760) 658-3881
               </a>
             </div>
           </div>

@@ -49,11 +49,8 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 style={{ color: C.white, fontSize: 14, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, marginBottom: 18 }}>Contact</h4>
-            <a href="tel:7606583881" style={{ display: "block", fontSize: 15, color: "rgba(255,255,255,0.75)", marginBottom: 8, textDecoration: "none", fontWeight: 600 }}>
-              📞 760-658-3881
-            </a>
-            <a href="tel:7604452261" style={{ display: "block", fontSize: 15, color: "rgba(255,255,255,0.75)", marginBottom: 18, textDecoration: "none", fontWeight: 600 }}>
-              📞 760-445-2261
+            <a href="tel:7606583881" style={{ display: "block", fontSize: 15, color: "rgba(255,255,255,0.75)", marginBottom: 18, textDecoration: "none", fontWeight: 600 }}>
+              📞 +1 (760) 658-3881
             </a>
             <div style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", lineHeight: 1.7 }}>
               San Diego & Surrounding Areas<br />
