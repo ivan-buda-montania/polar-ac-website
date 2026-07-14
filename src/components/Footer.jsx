@@ -1,17 +1,23 @@
-import { useState, useEffect, useRef } from "react";
 import PolarBearLogo from './PolarBearLogo';
 import { C } from '../tokens';
+import { useIsMobile } from '../hooks/useIsMobile';
 
-// ─── Footer ───────────────────────────────────────────────────────────────────
 export default function Footer() {
+  const isMobile = useIsMobile();
+
   return (
     <footer style={{
       background: C.navy,
       borderTop: `4px solid ${C.orange}`,
-      padding: "56px 5vw 28px",
+      padding: isMobile ? "44px 5vw 24px" : "56px 5vw 28px",
     }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 52, marginBottom: 44, alignItems: "start" }}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: isMobile ? "1fr" : "2fr 1fr 1fr",
+          gap: isMobile ? 36 : 52,
+          marginBottom: 44, alignItems: "start",
+        }}>
           {/* Brand + bear */}
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 16 }}>
@@ -59,7 +65,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: 22, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10 }}>
+        <div style={{
+          borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: 22,
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          justifyContent: "space-between", alignItems: isMobile ? "flex-start" : "center",
+          gap: 8,
+        }}>
           <div style={{ fontSize: 13, color: "rgba(255,255,255,0.3)" }}>
             © {new Date().getFullYear()} Polar AC Heating & Cooling. All rights reserved.
           </div>

@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { C } from '../tokens';
+import { useIsMobile } from '../hooks/useIsMobile';
 
-// ─── Contact Form ─────────────────────────────────────────────────────────────
 export default function Contact() {
   const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", message: "" });
   const [sent, setSent] = useState(false);
+  const isMobile = useIsMobile();
 
   const handle = e => setForm({ ...form, [e.target.name]: e.target.value });
   const submit = e => {
@@ -24,14 +25,20 @@ export default function Contact() {
   const blur = e => e.target.style.border = `1.5px solid ${C.lightGray}`;
 
   return (
-    <section id="contact" style={{ background: C.sand, padding: "90px 5vw" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "start" }}>
-        {/* Left */}
+    <section id="contact" style={{ background: C.sand, padding: isMobile ? "60px 5vw" : "90px 5vw" }}>
+      <div style={{
+        maxWidth: 1100, margin: "0 auto",
+        display: "grid",
+        gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+        gap: isMobile ? 40 : 60,
+        alignItems: "start",
+      }}>
+        {/* Contact info */}
         <div>
           <span style={{ fontSize: 12, fontWeight: 800, color: C.orange, letterSpacing: 3, textTransform: "uppercase" }}>Get In Touch</span>
           <h2 style={{
             fontFamily: "'Trebuchet MS', sans-serif",
-            fontSize: "clamp(1.8rem, 3vw, 2.4rem)",
+            fontSize: isMobile ? "clamp(1.6rem, 6vw, 2rem)" : "clamp(1.8rem, 3vw, 2.4rem)",
             fontWeight: 900, color: C.navy, margin: "10px 0 16px",
           }}>
             Book Your Service Today
@@ -57,7 +64,8 @@ export default function Contact() {
 
         {/* Form */}
         <div style={{
-          background: C.white, borderRadius: 22, padding: "38px 34px",
+          background: C.white, borderRadius: 22,
+          padding: isMobile ? "28px 20px" : "38px 34px",
           boxShadow: "0 10px 40px rgba(13,43,78,0.1)", border: `1px solid ${C.lightGray}`,
         }}>
           {sent ? (
@@ -74,7 +82,11 @@ export default function Contact() {
               <h3 style={{ fontFamily: "'Trebuchet MS', sans-serif", color: C.navy, fontSize: 20, margin: "0 0 24px", fontWeight: 800 }}>
                 ❄️ Free Service Estimate
               </h3>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                gap: 14, marginBottom: 14,
+              }}>
                 <input name="name" placeholder="Full Name" value={form.name} onChange={handle} required style={inp} onFocus={focus} onBlur={blur} />
                 <input name="phone" placeholder="Phone Number" value={form.phone} onChange={handle} required style={inp} onFocus={focus} onBlur={blur} />
               </div>

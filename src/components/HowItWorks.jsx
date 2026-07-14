@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from "react";
 import { C } from '../tokens';
 import { PROCESS } from '../data/process';
+import { useIsMobile } from '../hooks/useIsMobile';
 
-// ─── How It Works ─────────────────────────────────────────────────────────────
 export default function HowItWorks() {
+  const isMobile = useIsMobile();
+
   return (
-    <section id="how-it-works" style={{ background: C.white, padding: "90px 5vw" }}>
+    <section id="how-it-works" style={{ background: C.white, padding: isMobile ? "60px 5vw" : "90px 5vw" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <span style={{ fontSize: 12, fontWeight: 800, color: C.skyBlue, letterSpacing: 3, textTransform: "uppercase" }}>Simple Process</span>
@@ -19,33 +20,71 @@ export default function HowItWorks() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 0, position: "relative" }}>
-          {/* Connector line */}
-          <div style={{
-            position: "absolute", top: 36, left: "12.5%", right: "12.5%", height: 2,
-            background: `linear-gradient(90deg, ${C.skyBlue}, ${C.orange})`,
-            zIndex: 0,
-          }} />
-
-          {PROCESS.map((p, i) => (
-            <div key={p.step} style={{ textAlign: "center", padding: "0 16px", position: "relative", zIndex: 1 }}>
-              <div style={{
-                width: 72, height: 72, borderRadius: "50%", margin: "0 auto 20px",
-                background: i === 0 ? C.orange : i === 3 ? C.skyBlue : C.white,
-                border: `3px solid ${i === 0 ? C.orange : i === 3 ? C.skyBlue : C.lightGray}`,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontFamily: "'Trebuchet MS', sans-serif",
-                fontWeight: 900, fontSize: 22,
-                color: (i === 0 || i === 3) ? C.white : C.navy,
-                boxShadow: i === 0 ? "0 8px 24px rgba(245,130,32,0.4)" : i === 3 ? "0 8px 24px rgba(63,182,248,0.4)" : "0 4px 12px rgba(13,43,78,0.1)",
-              }}>
-                {p.step}
+        {isMobile ? (
+          /* Mobile: vertical steps */
+          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+            {PROCESS.map((p, i) => (
+              <div key={p.step} style={{ display: "flex", gap: 20, position: "relative", paddingBottom: i < PROCESS.length - 1 ? 32 : 0 }}>
+                {/* Left: circle + vertical line */}
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
+                  <div style={{
+                    width: 56, height: 56, borderRadius: "50%",
+                    background: i === 0 ? C.orange : i === 3 ? C.skyBlue : C.white,
+                    border: `3px solid ${i === 0 ? C.orange : i === 3 ? C.skyBlue : C.lightGray}`,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontFamily: "'Trebuchet MS', sans-serif",
+                    fontWeight: 900, fontSize: 18,
+                    color: (i === 0 || i === 3) ? C.white : C.navy,
+                    boxShadow: i === 0 ? "0 6px 20px rgba(245,130,32,0.4)" : i === 3 ? "0 6px 20px rgba(63,182,248,0.4)" : "0 2px 8px rgba(13,43,78,0.1)",
+                    flexShrink: 0,
+                  }}>
+                    {p.step}
+                  </div>
+                  {i < PROCESS.length - 1 && (
+                    <div style={{
+                      width: 2, flex: 1, minHeight: 32, marginTop: 4,
+                      background: `linear-gradient(180deg, ${i === 0 ? C.orange : C.skyBlue}, ${i === 2 ? C.skyBlue : C.lightGray})`,
+                    }} />
+                  )}
+                </div>
+                {/* Right: text */}
+                <div style={{ paddingTop: 8 }}>
+                  <h3 style={{ fontSize: 16, fontWeight: 700, color: C.navy, margin: "0 0 6px", fontFamily: "'Trebuchet MS', sans-serif" }}>{p.title}</h3>
+                  <p style={{ fontSize: 14, color: C.gray, lineHeight: 1.6, margin: 0 }}>{p.desc}</p>
+                </div>
               </div>
-              <h3 style={{ fontSize: 16, fontWeight: 700, color: C.navy, margin: "0 0 8px", fontFamily: "'Trebuchet MS', sans-serif" }}>{p.title}</h3>
-              <p style={{ fontSize: 13, color: C.gray, lineHeight: 1.6, margin: 0 }}>{p.desc}</p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          /* Desktop: horizontal 4-column */
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 0, position: "relative" }}>
+            {/* Connector line */}
+            <div style={{
+              position: "absolute", top: 36, left: "12.5%", right: "12.5%", height: 2,
+              background: `linear-gradient(90deg, ${C.skyBlue}, ${C.orange})`,
+              zIndex: 0,
+            }} />
+
+            {PROCESS.map((p, i) => (
+              <div key={p.step} style={{ textAlign: "center", padding: "0 16px", position: "relative", zIndex: 1 }}>
+                <div style={{
+                  width: 72, height: 72, borderRadius: "50%", margin: "0 auto 20px",
+                  background: i === 0 ? C.orange : i === 3 ? C.skyBlue : C.white,
+                  border: `3px solid ${i === 0 ? C.orange : i === 3 ? C.skyBlue : C.lightGray}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontFamily: "'Trebuchet MS', sans-serif",
+                  fontWeight: 900, fontSize: 22,
+                  color: (i === 0 || i === 3) ? C.white : C.navy,
+                  boxShadow: i === 0 ? "0 8px 24px rgba(245,130,32,0.4)" : i === 3 ? "0 8px 24px rgba(63,182,248,0.4)" : "0 4px 12px rgba(13,43,78,0.1)",
+                }}>
+                  {p.step}
+                </div>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: C.navy, margin: "0 0 8px", fontFamily: "'Trebuchet MS', sans-serif" }}>{p.title}</h3>
+                <p style={{ fontSize: 13, color: C.gray, lineHeight: 1.6, margin: 0 }}>{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

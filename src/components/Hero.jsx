@@ -1,12 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import PolarBearLogo from './PolarBearLogo';
 import { C } from '../tokens';
 import beachBg from '../assets/fondo1.png';
+import { useIsMobile } from '../hooks/useIsMobile';
 
-
-// ─── Hero ─────────────────────────────────────────────────────────────────────
 export default function Hero() {
   const [visible, setVisible] = useState(false);
+  const isMobile = useIsMobile();
+
   useEffect(() => { setTimeout(() => setVisible(true), 120); }, []);
 
   const anim = (delay = 0) => ({
@@ -21,11 +22,17 @@ export default function Hero() {
       background: `url(${beachBg}) center center / cover no-repeat`,
       position: "relative", overflow: "hidden",
       display: "flex", alignItems: "center",
-      padding: "90px 5vw 40px",
+      padding: isMobile ? "90px 5vw 60px" : "90px 5vw 40px",
     }}>
-      
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center", position: "relative", zIndex: 2 }}>
+      <div style={{
+        maxWidth: 1200, margin: "0 auto", width: "100%",
+        display: "grid",
+        gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+        gap: isMobile ? 32 : 40,
+        alignItems: "center",
+        position: "relative", zIndex: 2,
+      }}>
         {/* LEFT — copy */}
         <div style={anim(0)}>
           {/* Heat badge */}
@@ -41,7 +48,7 @@ export default function Hero() {
 
           <h1 style={{
             fontFamily: "'Trebuchet MS', Impact, sans-serif",
-            fontSize: "clamp(2.8rem, 6vw, 4.4rem)",
+            fontSize: isMobile ? "clamp(2.4rem, 10vw, 3.2rem)" : "clamp(2.8rem, 6vw, 4.4rem)",
             fontWeight: 900, color: C.navy,
             lineHeight: 1.0, margin: "0 0 10px",
             textShadow: "2px 2px 0 rgba(255,255,255,0.6)",
@@ -51,8 +58,8 @@ export default function Hero() {
           </h1>
 
           <p style={{
-            fontSize: "clamp(1rem, 2vw, 1.25rem)", color: C.navy,
-            fontWeight: 600, margin: "12px 0 8px", opacity: 0.85,
+            fontSize: isMobile ? "1rem" : "clamp(1rem, 2vw, 1.25rem)",
+            color: C.navy, fontWeight: 600, margin: "12px 0 8px", opacity: 0.85,
           }}>
             Prepare your AC before temperatures reach <span style={{ color: C.orange, fontWeight: 800 }}>110°F</span>
           </p>
@@ -61,11 +68,11 @@ export default function Hero() {
           </p>
 
           {/* CTA buttons */}
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 28 }}>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}>
             <a href="#contact" style={{
               background: C.orange, color: C.white,
-              padding: "15px 30px", borderRadius: 10,
-              fontWeight: 800, fontSize: 17, textDecoration: "none",
+              padding: isMobile ? "14px 22px" : "15px 30px", borderRadius: 10,
+              fontWeight: 800, fontSize: isMobile ? 15 : 17, textDecoration: "none",
               boxShadow: "0 8px 28px rgba(245,130,32,0.5)",
               transition: "all 0.2s", border: "none",
             }}
@@ -75,8 +82,8 @@ export default function Hero() {
             </a>
             <a href="tel:7606583881" style={{
               background: C.navy, color: C.white,
-              padding: "15px 28px", borderRadius: 10,
-              fontWeight: 700, fontSize: 16, textDecoration: "none",
+              padding: isMobile ? "14px 20px" : "15px 28px", borderRadius: 10,
+              fontWeight: 700, fontSize: isMobile ? 14 : 16, textDecoration: "none",
               boxShadow: "0 4px 16px rgba(13,43,78,0.3)",
               transition: "all 0.2s",
             }}
@@ -87,41 +94,60 @@ export default function Hero() {
           </div>
 
           {/* Trust row */}
-          <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
             {["✅ Licensed #1131567", "✅ Residential & Commercial", "✅ Same-Week Appointments"].map(b => (
               <span key={b} style={{ fontSize: 13, color: C.navy, fontWeight: 600, opacity: 0.75 }}>{b}</span>
             ))}
           </div>
         </div>
 
-        {/* RIGHT — Bear illustration */}
-        <div style={{ ...anim(0.2), display: "flex", flexDirection: "column", alignItems: "center", position: "relative" }}>
-          {/* Glow behind bear */}
-          <div style={{
-            position: "absolute", top: "50%", left: "50%",
-            transform: "translate(-50%, -55%)",
-            width: 320, height: 320, borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(63,182,248,0.15) 0%, transparent 70%)",
-            pointerEvents: "none",
-          }} />
-          <PolarBearLogo size={380} variant="surfing" />
+        {/* RIGHT — Bear illustration (hidden on mobile to keep hero clean) */}
+        {!isMobile && (
+          <div style={{ ...anim(0.2), display: "flex", flexDirection: "column", alignItems: "center", position: "relative" }}>
+            <div style={{
+              position: "absolute", top: "50%", left: "50%",
+              transform: "translate(-50%, -55%)",
+              width: 320, height: 320, borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(63,182,248,0.15) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }} />
+            <PolarBearLogo size={380} variant="surfing" />
 
-          {/* Floating badge */}
-          <a href="https://wa.me/17606583881?text=Hi!%20I%27d%20like%20a%20free%20AC%20service%20estimate." target="_blank" rel="noreferrer" style={{
-            position: "absolute", top: "5%", right: "5%",
-            background: C.sun, color: C.navy,
-            borderRadius: "50%", width: 80, height: 80,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            flexDirection: "column", fontFamily: "'Trebuchet MS', sans-serif",
-            fontWeight: 900, fontSize: 11, textAlign: "center", lineHeight: 1.2,
-            boxShadow: "0 6px 20px rgba(255,213,74,0.6)",
-            border: `3px solid ${C.orange}`,
-            animation: "pulse 2s ease-in-out infinite",
-            textDecoration: "none", cursor: "pointer",
-          }}>
-            FREE<br />ESTIMATE
-          </a>
-        </div>
+            {/* Floating badge */}
+            <a href="https://wa.me/17606583881?text=Hi!%20I%27d%20like%20a%20free%20AC%20service%20estimate." target="_blank" rel="noreferrer" style={{
+              position: "absolute", top: "5%", right: "5%",
+              background: C.sun, color: C.navy,
+              borderRadius: "50%", width: 80, height: 80,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              flexDirection: "column", fontFamily: "'Trebuchet MS', sans-serif",
+              fontWeight: 900, fontSize: 11, textAlign: "center", lineHeight: 1.2,
+              boxShadow: "0 6px 20px rgba(255,213,74,0.6)",
+              border: `3px solid ${C.orange}`,
+              animation: "pulse 2s ease-in-out infinite",
+              textDecoration: "none", cursor: "pointer",
+            }}>
+              FREE<br />ESTIMATE
+            </a>
+          </div>
+        )}
+
+        {/* Mobile floating badge (inline instead of absolute) */}
+        {isMobile && (
+          <div style={{ ...anim(0.15), display: "flex", justifyContent: "center" }}>
+            <a href="https://wa.me/17606583881?text=Hi!%20I%27d%20like%20a%20free%20AC%20service%20estimate." target="_blank" rel="noreferrer" style={{
+              background: C.sun, color: C.navy,
+              borderRadius: 14, padding: "14px 28px",
+              display: "inline-flex", alignItems: "center", gap: 10,
+              fontFamily: "'Trebuchet MS', sans-serif",
+              fontWeight: 900, fontSize: 15, textAlign: "center",
+              boxShadow: "0 6px 20px rgba(255,213,74,0.6)",
+              border: `3px solid ${C.orange}`,
+              textDecoration: "none",
+            }}>
+              🎁 FREE ESTIMATE — WhatsApp Us
+            </a>
+          </div>
+        )}
       </div>
 
       {/* Bottom wave */}
@@ -138,5 +164,3 @@ export default function Hero() {
     </section>
   );
 }
-
-

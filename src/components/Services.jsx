@@ -87,7 +87,7 @@ export default function Services() {
             From seasonal tune-ups to emergency repairs — keeping your system ice-cold when the valley hits 110°F.
           </p>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 28 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 28 }}>
           {SERVICES.map(s => <ServiceCard key={s.id} {...s} />)}
         </div>
       </div>

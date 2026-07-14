@@ -1,5 +1,6 @@
 import { C } from "../tokens";
 import PolarBearLogo from "./PolarBearLogo";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 const REASONS = [
   { icon: "🧊", title: "Beat the Heat Before It Starts", desc: "Don't wait until your AC breaks down on a 110°F day. Preventive service saves you hundreds." },
@@ -9,14 +10,27 @@ const REASONS = [
 ];
 
 export default function WhyChooseUs() {
+  const isMobile = useIsMobile();
+
   return (
     <section id="why-us" style={{
       background: `linear-gradient(180deg, ${C.ice} 0%, ${C.sand} 100%)`,
-      padding: "90px 5vw", overflow: "hidden",
+      padding: isMobile ? "60px 5vw" : "90px 5vw",
+      overflow: "hidden",
     }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
-        {/* Left: Bear + quote bubble */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "relative" }}>
+      <div style={{
+        maxWidth: 1200, margin: "0 auto",
+        display: "grid",
+        gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+        gap: isMobile ? 40 : 60,
+        alignItems: "center",
+      }}>
+        {/* Bear + quote bubble (on mobile: comes second via order) */}
+        <div style={{
+          display: "flex", flexDirection: "column", alignItems: "center",
+          position: "relative",
+          order: isMobile ? 2 : 1,
+        }}>
           {/* Quote bubble */}
           <div style={{
             background: C.white, borderRadius: 20,
@@ -26,7 +40,7 @@ export default function WhyChooseUs() {
             position: "relative", maxWidth: 300,
             fontFamily: "'Trebuchet MS', sans-serif",
           }}>
-            <div style={{ fontSize: 22, fontWeight: 900, color: C.navy, lineHeight: 1.1 }}>
+            <div style={{ fontSize: isMobile ? 18 : 22, fontWeight: 900, color: C.navy, lineHeight: 1.1 }}>
               "Stay cool.<br />I've got you covered."
             </div>
             <div style={{ fontSize: 13, color: C.gray, marginTop: 6 }}>— Polar Bear, Polar AC Mascot</div>
@@ -49,10 +63,10 @@ export default function WhyChooseUs() {
               background: "radial-gradient(circle, rgba(63,182,248,0.18) 0%, transparent 70%)",
               pointerEvents: "none",
             }} />
-            <PolarBearLogo size={240} variant="surfing" />
+            <PolarBearLogo size={isMobile ? 180 : 240} variant="surfing" />
           </div>
 
-          {/* Mini ac unit */}
+          {/* Mini AC unit */}
           <div style={{
             background: C.white, borderRadius: 12, padding: "10px 20px",
             border: `1.5px solid ${C.lightGray}`,
@@ -67,26 +81,30 @@ export default function WhyChooseUs() {
           </div>
         </div>
 
-        {/* Right: reasons grid */}
-        <div>
+        {/* Reasons grid */}
+        <div style={{ order: isMobile ? 1 : 2 }}>
           <span style={{ fontSize: 12, fontWeight: 800, color: C.orange, letterSpacing: 3, textTransform: "uppercase" }}>Why Polar AC?</span>
           <h2 style={{
             fontFamily: "'Trebuchet MS', sans-serif",
-            fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
+            fontSize: isMobile ? "clamp(1.6rem, 6vw, 2.2rem)" : "clamp(1.8rem, 3vw, 2.6rem)",
             fontWeight: 900, color: C.navy, margin: "10px 0 32px", lineHeight: 1.15,
           }}>
             San Diego & Surrounding Areas<br />
             <span style={{ color: C.skyBlue }}>Most Trusted</span> HVAC Team
           </h2>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: 16,
+          }}>
             {REASONS.map((r, i) => (
               <div key={i} style={{
-                background: C.white, borderRadius: 16, padding: "22px 20px",
+                background: C.white, borderRadius: 16, padding: "20px 18px",
                 border: `1.5px solid ${C.lightGray}`,
                 boxShadow: "0 2px 10px rgba(13,43,78,0.06)",
               }}>
-                <div style={{ fontSize: 28, marginBottom: 10 }}>{r.icon}</div>
+                <div style={{ fontSize: 26, marginBottom: 10 }}>{r.icon}</div>
                 <h3 style={{ fontSize: 15, fontWeight: 700, color: C.navy, margin: "0 0 8px", fontFamily: "'Trebuchet MS', sans-serif" }}>{r.title}</h3>
                 <p style={{ fontSize: 13, color: C.gray, lineHeight: 1.6, margin: 0 }}>{r.desc}</p>
               </div>

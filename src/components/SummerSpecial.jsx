@@ -1,10 +1,14 @@
 import { C } from "../tokens";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 export default function SummerSpecial() {
+  const isMobile = useIsMobile();
+
   return (
     <section id="summer-special" style={{
       background: `linear-gradient(135deg, ${C.navy} 0%, #0a3a6e 50%, #0d4f8a 100%)`,
-      padding: "80px 5vw", position: "relative", overflow: "hidden",
+      padding: isMobile ? "60px 5vw" : "80px 5vw",
+      position: "relative", overflow: "hidden",
     }}>
       {/* Background sun decoration */}
       <div style={{
@@ -42,23 +46,26 @@ export default function SummerSpecial() {
         <div style={{
           background: "rgba(255,255,255,0.06)",
           border: `2px solid rgba(255,213,74,0.3)`,
-          borderRadius: 24, padding: "44px 48px",
-          display: "grid", gridTemplateColumns: "1fr auto",
-          gap: 40, alignItems: "center",
+          borderRadius: 24,
+          padding: isMobile ? "32px 24px" : "44px 48px",
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          gap: isMobile ? 28 : 40,
+          alignItems: isMobile ? "stretch" : "center",
         }}>
-          <div>
+          <div style={{ flex: 1 }}>
             <h2 style={{
               fontFamily: "'Trebuchet MS', sans-serif",
-              fontSize: "clamp(1.8rem, 4vw, 3rem)",
+              fontSize: isMobile ? "clamp(1.6rem, 6vw, 2.2rem)" : "clamp(1.8rem, 4vw, 3rem)",
               fontWeight: 900, color: C.white, margin: "0 0 12px", lineHeight: 1.1,
             }}>
               Preventive Maintenance<br />
               <span style={{ color: C.sun }}>Tune-Up</span>
             </h2>
-            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.7)", lineHeight: 1.7, margin: "0 0 24px", maxWidth: 420 }}>
+            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.7)", lineHeight: 1.7, margin: "0 0 24px" }}>
               Full 21-point AC inspection + filter replacement + coil cleaning + refrigerant check. Avoid a $800+ emergency repair this summer.
             </p>
-            <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
               <a href="#contact" style={{
                 background: C.orange, color: C.white,
                 padding: "14px 28px", borderRadius: 10,
@@ -86,19 +93,22 @@ export default function SummerSpecial() {
           {/* Price badge */}
           <div style={{
             background: C.sun, color: C.navy,
-            borderRadius: 20, padding: "28px 36px",
+            borderRadius: 20,
+            padding: isMobile ? "20px 24px" : "28px 36px",
             textAlign: "center", flexShrink: 0,
             boxShadow: "0 12px 36px rgba(255,213,74,0.4)",
             border: `3px solid rgba(255,255,255,0.3)`,
+            alignSelf: isMobile ? "center" : "auto",
+            minWidth: isMobile ? 140 : "auto",
           }}>
             <div style={{ fontSize: 13, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Only</div>
-            <div style={{ fontSize: 72, fontWeight: 900, lineHeight: 1, fontFamily: "'Trebuchet MS', sans-serif" }}>$99</div>
+            <div style={{ fontSize: isMobile ? 56 : 72, fontWeight: 900, lineHeight: 1, fontFamily: "'Trebuchet MS', sans-serif" }}>$99</div>
             <div style={{ fontSize: 13, fontWeight: 700, marginTop: 6, opacity: 0.75 }}>per unit</div>
           </div>
         </div>
 
         {/* Checklist */}
-        <div style={{ display: "flex", gap: 28, justifyContent: "center", marginTop: 28, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 20, justifyContent: "center", marginTop: 28, flexWrap: "wrap" }}>
           {["✅ Preventive Maintenance", "✅ Repairs", "✅ Residential & Commercial"].map(item => (
             <span key={item} style={{ fontSize: 14, color: "rgba(255,255,255,0.65)", fontWeight: 600 }}>{item}</span>
           ))}
