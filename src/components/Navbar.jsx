@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import PolarBearLogo from './PolarBearLogo';
 import { C } from '../tokens';
+import navbarLogo from '../assets/logopolarac.png';
 
 
 
@@ -33,12 +34,16 @@ export default function Navbar() {
     }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 5vw", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
         {/* Logo */}
-        <a href="#hero" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-          <PolarBearLogo size={100} variant="small" />
-          <div>
-            <div style={{ fontFamily: "'Trebuchet MS', sans-serif", fontWeight: 900, fontSize: 20, color: C.white, lineHeight: 1, letterSpacing: 1 }}>POLAR AC</div>
-            <div style={{ fontSize: 9, color: C.skyBlue, letterSpacing: 3, textTransform: "uppercase", fontWeight: 600 }}>Heating & Cooling</div>
-          </div>
+        <a href="#hero" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
+          <img
+          src={navbarLogo}
+          alt="Polar AC logo"
+          style={{
+          height: 60,
+          width: "auto",
+          objectFit: "contain",
+          }}
+          />
         </a>
 
         {/* Desktop nav */}
