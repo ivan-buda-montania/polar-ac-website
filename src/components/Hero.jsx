@@ -43,7 +43,7 @@ export default function Hero() {
             fontSize: 13, fontWeight: 800, letterSpacing: 1,
             boxShadow: "0 4px 16px rgba(245,130,32,0.4)",
           }}>
-            🌡️ SUMMER 2025 · San Diego CA
+            🌡️ SUMMER 2026 · San Diego CA
           </div>
 
           <h1 style={{
