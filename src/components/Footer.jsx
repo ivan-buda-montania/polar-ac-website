@@ -47,7 +47,7 @@ export default function Footer() {
           {/* Services */}
           <div>
             <h4 style={{ color: C.white, fontSize: 14, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, marginBottom: 18 }}>Services</h4>
-            {["AC Tune-Up — $99", "Preventive Maintenance", "Refrigerant Recharge", "Residential Repair", "Commercial Service", "Emergency Repair"].map(s => (
+            {["AC Tune-Up", "Preventive Maintenance", "Refrigerant Recharge", "Residential Repair", "Commercial Service", "Emergency Repair"].map(s => (
               <div key={s} style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 9, cursor: "default" }}>{s}</div>
             ))}
           </div>

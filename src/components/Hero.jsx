@@ -78,7 +78,7 @@ export default function Hero() {
             }}
               onMouseOver={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(245,130,32,0.6)"; }}
               onMouseOut={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(245,130,32,0.5)"; }}>
-              ❄️ Schedule Tune-Up — $99
+              ❄️ Schedule Tune-Up
             </a>
             <a href="tel:7606583881" style={{
               background: C.navy, color: C.white,

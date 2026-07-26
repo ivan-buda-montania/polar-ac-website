@@ -3,7 +3,6 @@ export const SERVICES = [
   {
     id: "tune-up",
     title: "AC Tune-Up",
-    badge: "$99 Summer Special",
     desc: "21-point inspection: coil cleaning, refrigerant check, electrical connections & airflow test.",
     icon: "Thermometer",
   },

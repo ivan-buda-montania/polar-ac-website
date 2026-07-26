@@ -21,7 +21,6 @@ export default function Navbar() {
 
   const links = [
     { label: "Services", href: "#services" },
-    { label: "Summer Special", href: "#summer-special" },
     { label: "How It Works", href: "#how-it-works" },
     { label: "Testimonials", href: "#testimonials" },
     { label: "Contact", href: "#contact" },
@@ -56,7 +55,7 @@ export default function Navbar() {
               }}
                 onMouseOver={e => e.target.style.opacity = 1}
                 onMouseOut={e => e.target.style.opacity = 0.9}>
-                {l.label === "Summer Special" ? "☀️ " + l.label : l.label}
+                {l.label}
               </a>
             ))}
             <a href="tel:7606583881" style={{
@@ -122,13 +121,13 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 style={{
                   display: "block",
-                  color: l.label === "Summer Special" ? C.sun : C.white,
+                  color: C.white,
                   textDecoration: "none", fontSize: 16,
-                  fontWeight: l.label === "Summer Special" ? 700 : 500,
+                  fontWeight: 500,
                   padding: "13px 0",
                   borderBottom: "1px solid rgba(255,255,255,0.07)",
                 }}>
-                {l.label === "Summer Special" ? "☀️ " + l.label : l.label}
+                {l.label}
               </a>
             ))}
           </div>
