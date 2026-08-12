@@ -10,8 +10,8 @@ export default function Contact() {
   const handle = e => setForm({ ...form, [e.target.name]: e.target.value });
   const submit = e => {
     e.preventDefault();
-    const msg = `Hi! I'd like a free AC service estimate.\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nService: ${form.service}\nMessage: ${form.message}`;
-    window.open(`https://wa.me/17606583881?text=${encodeURIComponent(msg)}`, '_blank');
+    const msg = `Hi! I'd like a AC service estimate.\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nService: ${form.service}\nMessage: ${form.message}`;
+    window.open(`sms:7606583881?body=${encodeURIComponent(msg)}`, '_blank');
     setSent(true);
   };
 
@@ -44,7 +44,7 @@ export default function Contact() {
             Book Your Service Today
           </h2>
           <p style={{ fontSize: 16, color: C.gray, lineHeight: 1.7, marginBottom: 36 }}>
-            Free estimates on all service calls. We'll confirm your appointment within a few hours.
+            We'll confirm your appointment within a few hours.
           </p>
           {[
             { icon: "📞", label: "Phone", val: "+1 (760) 658-3881" },
@@ -80,7 +80,7 @@ export default function Contact() {
           ) : (
             <form onSubmit={submit}>
               <h3 style={{ fontFamily: "'Trebuchet MS', sans-serif", color: C.navy, fontSize: 20, margin: "0 0 24px", fontWeight: 800 }}>
-                ❄️ Free Service Estimate
+                ❄️ Request Your Service
               </h3>
               <div style={{
                 display: "grid",
@@ -93,7 +93,7 @@ export default function Contact() {
               <input name="email" type="email" placeholder="Email Address" value={form.email} onChange={handle} style={{ ...inp, marginBottom: 14 }} onFocus={focus} onBlur={blur} />
               <select name="service" value={form.service} onChange={handle} required style={{ ...inp, marginBottom: 14, cursor: "pointer" }}>
                 <option value="">Select Service Type</option>
-                <option>AC Tune-Up — $99 Summer Special</option>
+                <option>AC Tune-Up </option>
                 <option>Preventive Maintenance</option>
                 <option>Refrigerant Recharge</option>
                 <option>Residential Repair</option>
@@ -108,7 +108,7 @@ export default function Contact() {
               }}
                 onMouseOver={e => e.target.style.background = "#1a4070"}
                 onMouseOut={e => e.target.style.background = C.navy}>
-                Request My Free Estimate →
+                Request Service →
               </button>
               <p style={{ fontSize: 12, color: C.gray, textAlign: "center", marginTop: 10 }}>No spam. We'll only call to confirm your appointment.</p>
             </form>
