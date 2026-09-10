@@ -11,7 +11,7 @@ export default function Contact() {
   const submit = e => {
     e.preventDefault();
     const msg = `Hi! I'd like a AC service estimate.\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nService: ${form.service}\nMessage: ${form.message}`;
-    window.open(`sms:7606583881?body=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`sms:+17606583881?body=${encodeURIComponent(msg)}`, '_blank');
     setSent(true);
   };
 
