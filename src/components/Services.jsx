@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Thermometer, Wrench, Settings, Home, Building2, AlertCircle } from "lucide-react";
 import { C } from "../tokens";
 import { SERVICES } from "../data/index";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 // ─── Services Section ─────────────────────────────────────────────────────────
 const ICON_MAP = { Thermometer, Wrench, Settings, Home, Building2, AlertCircle };
@@ -69,10 +70,12 @@ function ServiceCard({ title, badge, desc, icon }) {
 }
 
 export default function Services() {
+  const isMobile = useIsMobile();
+
   return (
-    <section id="services" style={{ background: C.white, padding: "90px 5vw" }}>
+    <section id="services" style={{ background: C.white, padding: isMobile ? "60px 5vw" : "90px 5vw" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: 60 }}>
+        <div style={{ textAlign: "center", marginBottom: isMobile ? 44 : 60 }}>
           <span style={{ fontSize: 12, fontWeight: 800, color: C.orange, letterSpacing: 3, textTransform: "uppercase" }}>
             What We Do
           </span>

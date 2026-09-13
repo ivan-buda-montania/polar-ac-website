@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { C } from './tokens';
+import { useIsMobile } from './hooks/useIsMobile';
 
 // ─── App (Root) ───────────────────────────────────────────────────────────────
 import Navbar from './components/Navbar';
@@ -12,6 +13,25 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function App() {
+  const isMobile = useIsMobile();
+  const [contactInView, setContactInView] = useState(false);
+
+  // On mobile the floating button would sit on top of the contact form's submit
+  // button / footer, so hide it while those sections are on screen.
+  useEffect(() => {
+    const targets = [document.getElementById("contact"), document.querySelector("footer")].filter(Boolean);
+    if (!targets.length) return;
+    const visible = new Set();
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
+      setContactInView(visible.size > 0);
+    });
+    targets.forEach(t => obs.observe(t));
+    return () => obs.disconnect();
+  }, []);
+
+  const hideSms = isMobile && contactInView;
+
   return (
     <div style={{ fontFamily: "'Trebuchet MS', Helvetica, sans-serif", margin: 0, padding: 0 }}>
       <Navbar />
@@ -25,7 +45,10 @@ export default function App() {
 
       {/* Floating SMS Button */}
       <div style={{
-        position: "fixed", bottom: 24, right: 24, zIndex: 999,
+        position: "fixed", bottom: isMobile ? 16 : 24, right: isMobile ? 16 : 24, zIndex: 999,
+        opacity: hideSms ? 0 : 1,
+        pointerEvents: hideSms ? "none" : "auto",
+        transition: "opacity 0.25s",
       }}>
         <a href="sms:+17606583881?body=Hi!%20I%27d%20like%20an%20AC%20service%20estimate." style={{
           width: 56, height: 56, borderRadius: "50%",
