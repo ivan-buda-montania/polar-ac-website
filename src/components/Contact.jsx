@@ -17,7 +17,7 @@ export default function Contact() {
 
   const inp = {
     width: "100%", padding: "12px 16px", borderRadius: 8,
-    border: `1.5px solid ${C.lightGray}`, fontSize: 15,
+    border: `1.5px solid ${C.lightGray}`, fontSize: isMobile ? 16 : 15, // <16px triggers iOS zoom on focus
     color: C.navy, fontFamily: "inherit", outline: "none",
     boxSizing: "border-box", background: C.white, transition: "border 0.2s",
   };

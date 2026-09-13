@@ -81,6 +81,24 @@ export default function Testimonials() {
             </div>
           ))}
         </div>
+
+        <div style={{ textAlign: "center", marginTop: 48 }}>
+          <a
+            href="https://g.page/r/CSiKEwJwFR2KEBM/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 10,
+              background: C.navy, color: C.white,
+              padding: "14px 30px", borderRadius: 10,
+              fontWeight: 800, fontSize: 15, textDecoration: "none",
+              boxShadow: "0 6px 20px rgba(13,43,78,0.2)",
+            }}
+          >
+            <span style={{ color: C.sun }}>★</span>
+            Leave Us a Google Review
+          </a>
+        </div>
       </div>
     </section>
   );

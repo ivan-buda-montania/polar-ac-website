@@ -114,7 +114,7 @@ export default function Hero() {
             <PolarBearLogo size={380} variant="surfing" />
 
             {/* Floating badge */}
-            <a href="sms:7606583881?body=Hi!%20I%27d%20like%20an%20AC%20service%20estimate." style={{
+            <a href="sms:+17606583881?body=Hi!%20I%27d%20like%20an%20AC%20service%20estimate." style={{
               position: "absolute", top: "5%", right: "5%",
               background: C.sun, color: C.navy,
               borderRadius: "50%", width: 80, height: 80,
@@ -134,7 +134,7 @@ export default function Hero() {
         {/* Mobile floating badge (inline instead of absolute) */}
         {isMobile && (
           <div style={{ ...anim(0.15), display: "flex", justifyContent: "center" }}>
-            <a href="sms:7606583881?body=Hi!%20I%27d%20like%20an%20AC%20service%20estimate." style={{
+            <a href="sms:+17606583881?body=Hi!%20I%27d%20like%20an%20AC%20service%20estimate." style={{
               background: C.sun, color: C.navy,
               borderRadius: 14, padding: "14px 28px",
               display: "inline-flex", alignItems: "center", gap: 10,
